@@ -1,0 +1,868 @@
+//Implementation of Stack
+
+import java.util.Scanner;
+public class Stack_Ex 
+{
+   private int tos;
+   private int  maxsize;
+   private int stack[];
+   
+   void createstack(int size) {   // iniliased the stack
+	   maxsize= size;
+	   tos=-1;
+	   stack = new int[size];
+   }
+   void push(int e) 
+   {
+	   tos++;
+	   stack[tos]=e;
+   }
+   boolean isFull() 
+   {
+	   if(tos==maxsize-1)
+		   return true;
+	   else
+	      return false;  
+   }
+	int pop() 
+	{
+	 int temp = stack[tos];
+	 tos--;
+	 return temp;
+	}
+	boolean isEmpty() 
+	{
+		if(tos==-1)
+			return true;
+		else
+			return false;
+	}
+	void printstack() 
+	{
+		for(int i = tos;i>=0;i-- ) 
+		{
+			System.out.println(stack[i]);
+		}
+	}
+	int peek() //tos     top on stack decrement nhi hoga
+	{
+		return(stack[tos]);
+	}
+	
+	
+	public static void main(String[] args) 
+	{
+		int ch,e,size;
+		 Scanner in = new Scanner(System.in);
+		 Stack_Ex obj = new Stack_Ex();
+		 System.out.println("Enter the stack size");
+		 size=in.nextInt();
+		 obj.createstack(size);
+		 
+		 do 
+		 {
+			 System.out.println("\nMenu for stack\n1.Push\n2.Pop\n3.Peek\n4.Printstack");
+			 ch = in.nextInt();
+			 
+			 switch(ch) 
+			 {
+			    case 1:
+			    	if(obj.isFull()!=true)
+			    {
+			    	System.out.println("Enter element");
+			    	e=in.nextInt();
+			    	obj.push(e);
+			    }
+			    	else
+			    		System.out.println("Stack is Full");
+			    	break;
+			    	
+			    	
+			    case 2:
+			    	if(obj.isEmpty()!=true) 
+			    	{
+			    		
+			    		System.out.println("Element pop " +obj.pop() );
+			    	}
+			    	else
+			    		System.out.println("Stack is Empty");
+			    	break;
+			    	
+			    case 3:
+			    	if(obj.isEmpty()!=true) 
+			    	{
+			    		System.out.println("Element peek " +obj.peek());
+			    	}
+			    	else
+			    		System.out.println("Stack is Empty");
+			    	break;
+			    	
+			    case 4:
+			    	if(obj.isEmpty()!=true) 
+			    	{
+			    		System.out.println("stack has");
+			    		obj.printstack();
+			    	}
+			    	else
+			    		System.out.println("Stack is Empty");
+			    	break;
+			    case 0:
+			    	System.out.println("Exit Code - Come out thank you-");
+			    	
+			    default:
+			    	System.out.println("Please enter a vaild input");
+			    	
+			 }
+		 }while(ch!=0);   //  jab tak 0 nhi aata chalte raho
+		
+
+	}
+
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Implementation of Queue
+
+import java.util.*;
+public class Queue_1 
+{
+   private int rear;
+   private int front;
+   private int maxsize;
+   private int queue[];
+   
+   void createqueue(int size) 
+   {
+	   maxsize=size;
+	   rear=-1;
+	   front=0;
+	   queue= new int[size];
+   }
+   void Enqueue(int e) 
+   {
+	   rear++;
+	   queue[rear]=e;
+   }
+   boolean isFull() 
+   {
+	   if(rear==maxsize-1)
+		   return true;
+	   else
+		   return false;
+				   
+   }
+   int Dequeue() 
+   {
+	   int temp = queue[front];
+	   front++;
+	   return temp;
+   }
+   boolean isEmpty()
+   {
+	   if(front>rear) 
+		   return true;
+	   else
+		   return false;
+	   
+   }
+   void printqueue() 
+   {
+	   for(int i =front;i<=rear;i++) 
+	   {
+		   System.out.println(queue[i]);
+	   }
+   }
+	
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in);
+		Queue_1 obj = new Queue_1();
+		System.out.println("Please enter the size of queue");
+		int e=in.nextInt();
+		obj.createqueue(e);
+		int ch,a;
+		
+		do 
+		{
+			System.out.println("\nMenuforqueue\n1.rear\n2.front\n3.printqueue");
+			System.out.println("Enter the Choice");
+			ch=in.nextInt();
+			
+			switch(ch)
+			{
+			 case 1:
+				 if(obj.isFull()!=true)
+			 {
+					System.out.println("Enter element");
+				    a=in.nextInt();	 
+				   obj.Enqueue(a);
+			 }
+				 else
+					 System.out.println("Queue is full");
+				 break;
+				 
+			 case 2:
+				 if(obj.isEmpty()!=true)
+			 {
+				 System.out.println("remove elemnet is :" +obj.Dequeue());
+			 }
+				 else 
+					 System.out.println("Queue is Empty");
+				 
+			 case 0:{
+				 System.out.println("Exit");
+			 }
+			 case 3:
+				 if(obj.isEmpty()!=true)
+			 {
+					 System.out.println("Queue elements is:");
+				 obj.printqueue();
+			 }
+			
+			}
+			
+			
+		}while(ch!=0);
+
+	}
+	
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Implementation of Circular Queue
+
+import java.util.Scanner;
+
+public class CirQueue 
+{
+	private int rear;
+	   private int front;
+	   private int maxsize;
+	   private int queue[];
+	  private int count;
+	   
+	   void createqueue(int size) 
+	   {
+		   maxsize=size;
+		   rear=-1;
+		   front=0;
+		   queue= new int[size];
+		   count=0;
+	   }
+	   void Enqueue(int e) 
+	   {  
+		   rear= (rear+1)%maxsize;
+		   
+		   queue[rear]=e;
+		   count++;
+	   }
+	   boolean isFull() 
+	   {
+		   if(count==maxsize)
+			   return true;
+		   else
+			   return false;
+					   
+	   }
+	   int Dequeue() 
+	   {
+		   int temp = queue[front];
+		   front=(front+1)%maxsize;
+		   
+		   count--;
+		   return temp;
+	   }
+	   boolean isEmpty()
+	   {
+		   if(count==0) 
+			   return true;
+		   else
+			   return false;
+		   
+	   }
+	   void printqueue() 
+	   {
+		   int i = front;
+		   int c=0;
+		   while(c<count) {
+			   
+	   }
+	   }
+		   public static void main(String[] args) 
+		   {
+		 	   Scanner in = new Scanner(System.in);
+		 	  CirQueue  obj = new CirQueue ();
+		 		System.out.println("Please enter the size of queue");
+		 		int e=in.nextInt();
+		 		obj.createqueue(e);
+		 		int ch,a;
+		 		do 
+		 		{
+		 			System.out.println("\nMenuforqueue\n1.rear\n2.front\n3.printqueue");
+		 			System.out.println("Enter the Choice");
+		 			ch=in.nextInt();
+		 			
+		 			switch(ch)
+		 			{
+		 			 case 1:
+		 				 if(obj.isFull()!=true)
+		 			 {
+		 					System.out.println("Enter element");
+		 				    a=in.nextInt();	 
+		 				   obj.Enqueue(a);
+		 			 }
+		 				 else
+		 					 System.out.println("Queue is full");
+		 				 break;
+		 				 
+		 			 case 2:
+		 				 if(obj.isEmpty()!=true)
+		 			 {
+		 				 System.out.println("remove elemnet is :" +obj.Dequeue());
+		 			 }
+		 				 else 
+		 					 System.out.println("Queue is Empty");
+		 				 
+		 			 case 0:{
+		 				 System.out.println("Exit");
+		 			 }
+		 			 case 3:
+		 				 if(obj.isEmpty()!=true)
+		 			 {
+		 					 System.out.println("Queue elements is:");
+		 				 obj.printqueue();
+		 			 }
+		 			
+		 		  }
+		 			
+		 			
+		 		}while(ch!=0);
+
+		 	}
+		 	
+		 		
+		   
+		 }   
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Implementation of LinkedList
+
+import java.util.Scanner;
+
+
+class Node{
+	int data;
+   Node next;
+   
+   Node(int data){
+	   this.data=data;
+	   next=null;
+   }
+}
+public class LiskList_4 
+{
+	private	Node root;
+    
+    void createList() {
+    	root=null;    // intially null hoga
+    }
+	 void insertleft(int e) {
+		 Node n = new Node(e);
+		 if(root==null)        // first node create kro agar woh first node hai make him root node
+			 root=n;
+		 else {
+			 n.next=root;//1
+			 root=n;
+		 }
+	 }
+	 void deleteLeft() {
+		 if(root==null)  // first node asel tr
+			 System.out.println("Empty list");
+		 else {
+			 Node t= root;  //  address store kiya root ka in t
+			 root=root.next;//root ko movr kiya
+			 System.out.println("Deleted : "+t.data);// t local variable hai woh t jisko deik rha hai uske block ko gc
+		 }
+	 }
+	 void insertRight(int e) {
+		 Node n = new Node(e);
+		 if(root==null)
+			 root=n;
+		 else {
+			Node t = root;
+			while(t.next!=null)   //jab tak null nhi aaya tab tak iterate kro
+				t=t.next;
+			
+			t.next=n;  //link krna hai toh   phele null th usme new node ka addresss store kiya hai 
+		 }
+		 }
+		 void deleteRight() {
+			 if(root==null)
+				 System.out.println("Empty list");
+			 else {
+				 Node t= root;  //  address store kiya root ka in t
+				 Node t2=t;
+				 
+				 while(t.next!=null) {
+					 t2=t;
+					 t=t.next;
+				 }
+				 if(t==null)   // for one root hai  toh usko delete kro
+					 root=null;
+				 else
+				  t2.next=null;
+			 }
+		 }
+			 void printList() 
+			 {
+				 if(root==null)
+					 System.out.println("Emptylist");
+				 else 
+				 { 
+				   Node t = root;
+				 while(t!=null) 
+				 {
+					 System.out.println(t.data+"->");
+					 t=t.next;
+				 }
+					 
+			   }//else
+				 
+			 }//printlist
+			 
+			 void search(int key)   //search at specify
+			 {
+				 
+				 if(root==null)
+				 {
+					 System.out.println("Emptylist");
+				 }
+				 else 
+				 {
+					 Node t=root;
+					while(t!=null && t.data!=key) 
+					{
+						t=t.next;
+					}
+					if(t==null)
+						System.out.println("Not Found");
+					else
+						System.out.println("Found in list");
+					
+				 }
+				 
+			 }
+			 
+			 void deleteelement(int key)   //search at specify
+			 {
+				 
+				 if(root==null)
+				 {
+					 System.out.println("Emptylist");
+				 }
+				 else 
+				 {
+					 Node t=root;
+					 Node t2=t;
+					while(t!=null && t.data!=key) 
+					{   
+						t2=t;
+						t=t.next;
+					}
+					if(t==null)
+						System.out.println("Not Found");
+					else //found
+					{
+						if(t==root)  //first position  ==>delete left
+							root=root.next;
+						else if(t.next==null)
+							t2.next=null;
+						else 
+						{
+							t2.next=t.next;
+						}
+						System.out.println(t.data+ "Deleted");
+					}
+				 }
+				 
+			 }
+			 
+			 void insertAt(int e,int i) {     //isme insert left,right and at specify
+				 Node n = new Node(e);
+				 if(root==null) //first
+					 root=n;
+				 else {
+					Node t = root;
+					Node t2=t;
+					while(  i>0 && t!=null) { 
+						   t2=t ;             //jab tak null nhi aaya tab tak iterate kro
+						t=t.next;
+						i--;
+						
+					}
+					if(t==null && i>0)
+						System.out.println("Index out of bound");
+					else 
+					{
+						if(i==0)
+							t2.next=n; // join kiya
+						if(t==root)    //index at zero
+							{n.next=root;
+						root=n;}
+						else 
+						{
+							t2.next=n;
+							n.next=t;
+						}
+					}
+				 }
+				 }
+			 
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in);
+		LiskList_4 obj = new LiskList_4();
+		
+		obj.createList();
+		int ch,a;
+		
+		do 
+		{
+			System.out.println("\nMenu for linkedlist\n1.insert right\n2.insert left\n3.delete left\n4.delete right\n5.printlist\n6.search\n7.deleteelement\n8.InsertAt\n0.Exit");
+			System.out.println("Enter the Choice");
+			ch=in.nextInt();
+			
+			switch(ch)
+			{
+			 case 1:
+				
+			 {
+					System.out.println("Enter element");
+				    a=in.nextInt();	 
+				   obj.insertRight(a);
+				   break;
+			 }
+				 
+				 
+				 
+			 case 2:
+				    System.out.println("Enter element");
+				    a=in.nextInt();
+				    obj.insertleft(a);
+				break;
+			 
+				 
+			 
+			 case 3:
+				
+				 obj.deleteRight();
+				 break;
+				 
+			 case 4:
+				 obj.deleteRight();
+				 break;
+				 
+			 case 5:
+				 obj.printList();
+				 break;
+			 case 6:
+				 System.out.println("Enter element");
+				    a=in.nextInt();
+				    obj.search(a);
+				    break;
+				    
+			 case 7:
+				 System.out.println("Enter element");
+				    a=in.nextInt();
+				    obj.deleteelement(a);
+				    break; 
+			 case 8:
+				 System.out.println("Enter index");
+				 int index=in.nextInt();
+				 System.out.println("Enter value");
+				 a=in.nextInt();
+				 obj.insertAt(index, a);
+				 
+				 
+			 case 0:{
+				 System.out.println("Exit");
+				 break;
+			 }
+			
+			}
+			
+			
+		}while(ch!=0);
+
+	}
+	
+
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// Implementation of Tree
+
+//doubly linkedlist implementation
+
+class Node{
+	int data;
+   Node left,right;
+   
+   Node(int data){
+	   this.data=data;
+	   left=right=null;
+   }
+}
+public class Treee_1 
+{
+
+	Node root;
+	static  int count;
+	
+	void createTree() 
+	{
+		root=null;
+	}
+	void insert(Node r,Node n) //r==>root     n==>new node jo pass krege
+	{
+	   if(root==null)  //agar root hai hi nhi toh n mera root node bnega
+		   root=n;
+	   else 
+	   {
+		   if(n.data<r.data)    //bst rule child is smaller then parentt left
+		   {
+			  
+			   if(r.left==null)
+				   r.left=n;
+			   else
+				   insert(r.left,n);
+		   }
+		   
+		   else 
+		   {
+			   if(r.right==null)
+				   r.right=n;
+			   else
+				   insert(r.right,n);
+		   }
+	   }
+		 
+	}//if
+	
+	void inorder(Node r) 
+	{
+		if(r!=null) {
+		//lpr
+		inorder(r.left);  //l
+		System.out.println(r.data); //p
+		inorder(r.right);}
+	}
+	
+	void preorder(Node r) 
+	{
+		if(r!=null) {
+		//plr  +ab
+		
+		System.out.println(r.data); //p
+		preorder(r.left);  //l
+		preorder(r.right);}//r
+	}
+	
+	void postorder(Node r)  //LRP
+	{
+		if(r!=null) {
+		//ab+  ==>lrp
+		
+		
+		postorder(r.left);  //l
+		postorder(r.right);}//r
+		System.out.println(r.data); //p
+	}
+	
+	void CountNodes(Node r) 
+	{
+		if(r!=null) 
+		{
+			CountNodes(r.left);
+			Treee_1.count++;
+			CountNodes(r.right);//r
+		}
+	}
+	
+	void CountLeafNodes(Node r) 
+	{
+		if(r!=null) 
+		{
+			CountNodes(r.left);//l
+			if(r.left==null && r.right==null)
+			Treee_1.count++; //
+			CountNodes(r.right);//r
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		Treee_1 obj = new Treee_1 ();
+		obj.createTree();
+		
+		
+		Node n = new Node(50);
+		obj.insert(obj.root, n);
+		
+		 n = new Node(30);
+		 obj.insert(obj.root, n);
+		 
+		 n = new Node(100);
+		 obj.insert(obj.root, n);
+		
+		 n = new Node(10);
+		 obj.insert(obj.root, n);
+		 
+		 System.out.println("Inorder");
+		 System.out.println("preorder");
+		 obj.preorder(obj.root);
+		 
+		 System.out.println("postorder");
+		 obj.postorder(obj.root);
+		 
+		 obj.CountNodes(obj.root);
+		 System.out.println( "Nodes total"+Treee_1.count);
+		 
+		 count=0;
+		 
+		 obj.CountLeafNodes(obj.root);
+		 System.out.println("leaf node" +Treee_1.count);
+		 
+		 		
+
+	}
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Implementation of Graph
+
+
+
+import java.util.*;
+public class GraphDemo 
+{
+  int v,visited[],g[][];
+  //v number of nodes  
+  //g is Adjacency matrix of v x v
+  //visited[i] is 1:visited 0:unvisited
+  
+  void createGraph(int nodes)
+  {
+      v=nodes;
+      Scanner in=new Scanner(System.in);
+      g=new int[v][v];//adj mat
+      visited=new int[v];//visited array
+      for(int i =0;i<v;i++)
+      {
+          for(int j=0;j<v;j++)
+          {
+              System.out.println("Enter value for v"+i+" to v"+j+" (999 for infinity):");
+              g[i][j]=in.nextInt();
+              
+          }
+      }
+  }
+  void printG()
+  {
+       for(int i =0;i<v;i++)
+      {
+          for(int j=0;j<v;j++)
+          {
+              System.out.print(g[i][j]+"\t");
+          }
+              System.out.println();
+      }
+  }
+  
+  public void resetvisited()
+  {
+         for(int i =0;i<v;i++)
+         {
+             visited[i]=0;//unvisited 0 and 1 means visited
+         }
+             
+   }
+  
+  public void DFS(int source)
+  {
+      visited[source]=1;
+      System.out.println("V"+source);
+      for(int i=0;i<v;i++)
+      {
+          if(g[source][i]==1 && visited[i]!=1)
+          //neighbour and unvisited
+          {
+              DFS(i);
+          }
+      }
+  }
+   /* public boolean DFS_search(int source,int key)
+  {
+      if(key==source)
+      {
+           flag=true;
+      }
+       visited[source]=1;
+      System.out.println("V"+source);
+      for(int i=0;i<v;i++)
+      {
+          if(g[source][i]==1 && visited[i]!=1)//neighbour and unvisited
+          {
+              DFS_search(i,key);
+          }
+      }
+       return(flag);
+  }*/
+
+  public void BFS(int source)
+  {
+      int q[]=new int[v];
+      int front=0,rear=-1;
+      visited[source]=1;
+      q[++rear]=source;//enqueue
+      while(front<=rear)//not empty
+      {
+          int element=q[front++];//dequeue
+          System.out.print("V"+element+"-");
+         
+          for(int i=0;i<v;i++)
+            {
+               if(g[element][i]==1 && visited[i]!=1)//neighbour and unvisited
+               {
+                  visited[i]=1;//visited
+                  q[++rear]=i;//enqueue
+               }
+            }
+      }
+  }
+  public static void main(String args[])
+  {
+      GraphDemo  obj=new GraphDemo();
+      obj.createGraph(4);
+      obj.printG();
+      obj.resetvisited();
+       System.out.println("DFS");
+       obj.DFS(2);
+      //obj.resetvisited();
+      //System.out.println("BFS");
+      //obj.BFS(0);
+      
+  }
+}
+
+
